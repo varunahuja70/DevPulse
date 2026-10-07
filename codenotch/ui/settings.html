@@ -51,18 +51,21 @@
   html, body {
     margin: 0;
     height: 100%;
-    background: var(--pane);
+    background: #000000 !important;
     overflow: hidden;
     user-select: none;
     -webkit-user-select: none;
   }
   body {
-    font: 13.5px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+    font: 13px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
     color: var(--text);
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background: #000000 !important;
   }
-  body.solid { background: var(--pane); }
+  body.solid { background: #000000 !important; }
   :focus-visible { outline: 2px solid rgba(38, 214, 124, 0.4); outline-offset: 2px; }
   button { font: inherit; color: inherit; cursor: pointer; }
   html[lang="ko"] body { word-break: keep-all; }
@@ -71,31 +74,32 @@
   #app {
     display: flex;
     height: 100%;
-    background: var(--pane);
+    background: #000000 !important;
     position: relative;
     overflow: hidden;
   }
 
   /* ==========================================================================
-     PHYSICAL STABILITY FOR ICON SVGS
+     PHYSICAL STABILITY FOR ICONS & ELEMENTS (ZERO JITTER / DRIFT)
      ========================================================================== */
   .badge svg, .glyph svg, .glyph img, #close svg, #quit svg,
   .quit-chevron, .notice-info, .notice-chevron {
     pointer-events: none;
     flex-shrink: 0;
+    transform: none !important;
   }
 
   /* ==========================================================================
-     LEFT SIDEBAR: macOS-STYLE CLEAN TWO-COLUMN SIDEBAR WITH FLUID SPRING HOVERS
+     LEFT SIDEBAR: NATIVE macOS-STYLE CLEAN TWO-COLUMN SIDEBAR
      ========================================================================== */
   #side {
-    width: 224px;
+    width: 216px;
     height: 100%;
-    background: var(--side);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    background: #000000 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
     display: flex;
     flex-direction: column;
-    padding: 24px 14px 20px 14px;
+    padding: 22px 12px 18px 12px;
     flex: none;
     position: relative;
     z-index: 2;
@@ -105,7 +109,7 @@
     font-weight: 700;
     color: #ffffff;
     padding: 0 10px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     letter-spacing: -0.025em;
     user-select: none;
     flex: none;
@@ -114,96 +118,92 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 11px;
     width: 100%;
-    height: 46px;
+    height: 42px;
     padding: 0 10px;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     border: 1px solid transparent;
-    border-radius: 14px;
+    border-radius: 12px;
     background: transparent;
     text-align: left;
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
     color: #828691;
     cursor: pointer;
-    transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
-                color 200ms cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
-                transform 150ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
+                color 160ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
     user-select: none;
   }
   .row:hover:not(.sel) {
     background-color: rgba(255, 255, 255, 0.05);
-    color: #e2e4ea;
-    transform: translateX(2px);
+    color: #f0f1f5;
   }
   .row:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
   }
   .row.sel {
-    background-color: #121214;
-    border-color: rgba(255, 255, 255, 0.10);
+    background-color: #141416;
+    border-color: rgba(255, 255, 255, 0.08);
     color: #ffffff;
     font-weight: 600;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   }
 
   .badge {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    min-height: 32px;
-    border-radius: 10px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 8px;
     display: grid;
     place-items: center;
     flex: none;
-    background: #0d0d0f;
+    background: #0d0d10;
     border: 1px solid rgba(255, 255, 255, 0.06);
     color: #828691;
-    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
   }
-  .row:hover .badge {
-    transform: scale(1.05);
+  .row:hover:not(.sel) .badge {
+    background-color: #141418;
+    border-color: rgba(255, 255, 255, 0.09);
+    color: #c0c4cc;
   }
   .row.sel .badge {
-    background: #1c1d22;
+    background: #1e1f24;
     border-color: rgba(255, 255, 255, 0.12);
     color: #ffffff;
-    transform: scale(1.02);
   }
   .badge svg {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
   }
 
   #side .grow { flex: 1; }
 
-  /* Quit DevPulse Bottom Row with Pulsing Red Squircle */
+  /* Quit DevPulse Bottom Row */
   .quit-card {
     width: 100%;
-    height: 50px;
+    height: 46px;
     padding: 0 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: 14px;
-    background: #0d0d10;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background: #0c0c0e;
+    border: 1px solid rgba(255, 255, 255, 0.07);
     cursor: pointer;
     flex: none;
-    transition: background-color 200ms ease, border-color 200ms ease, transform 150ms cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 200ms ease;
+    transition: background-color 160ms ease, border-color 160ms ease;
     user-select: none;
     margin-top: auto;
   }
   .quit-card:hover {
-    background-color: #141418;
-    border-color: rgba(255, 255, 255, 0.14);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    background-color: #131317;
+    border-color: rgba(255, 255, 255, 0.12);
   }
   .quit-card:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
   }
   .quit-left {
     display: flex;
@@ -211,32 +211,30 @@
     gap: 10px;
   }
   .quit-left span {
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 600;
     color: #ffffff;
   }
   .badge.b-red {
     background: #eb3b30;
     border: none;
-    border-radius: 9px;
-    box-shadow: 0 0 14px rgba(235, 59, 48, 0.45);
+    border-radius: 8px;
     color: #ffffff;
-    transition: box-shadow 200ms ease, transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    transition: background-color 160ms ease;
   }
   .quit-card:hover .badge.b-red {
-    box-shadow: 0 0 22px rgba(235, 59, 48, 0.75);
-    transform: scale(1.06);
+    background: #f04438;
   }
   .quit-chevron {
     width: 12px;
     height: 12px;
     stroke: #6b6e78;
     color: #6b6e78;
-    transition: stroke 200ms ease, transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    transition: stroke 160ms ease;
   }
   .quit-card:hover .quit-chevron {
     stroke: #ffffff;
-    transform: translateX(2px);
   }
 
   /* ==========================================================================
@@ -248,30 +246,30 @@
     flex-direction: column;
     min-width: 0;
     height: 100%;
-    background: var(--pane);
+    background: #000000 !important;
     position: relative;
   }
   #head {
     height: auto;
-    min-height: 72px;
+    min-height: 68px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 24px 28px 12px 28px;
+    padding: 22px 28px 12px 28px;
     position: relative;
     flex: none;
   }
   .head-text {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
     min-width: 0;
   }
   #head h1 {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     margin: 0;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
     color: #ffffff;
     line-height: 1.2;
   }
@@ -283,37 +281,36 @@
     line-height: 1.4;
   }
   #close {
-    width: 32px;
-    height: 32px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: #202126;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #161619;
     color: #9aa0aa;
     display: grid;
     place-items: center;
     border-radius: 50%;
     cursor: pointer;
     flex: none;
-    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, transform 240ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
   }
   #close svg {
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
     stroke: currentColor;
-    stroke-width: 1.8;
+    stroke-width: 1.9;
   }
   #close:hover {
-    background-color: #2b2d35;
+    background-color: #222328;
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.16);
-    transform: rotate(90deg) scale(1.06);
   }
   #close:active {
-    transform: rotate(90deg) scale(0.92);
+    transform: scale(0.94);
   }
   #strip {
     margin: 0 28px 8px;
     padding: 8px 14px;
-    border-radius: 12px;
+    border-radius: 10px;
     background: var(--danger-bg);
     color: var(--danger);
     font-size: 12px;
@@ -323,28 +320,29 @@
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 6px 28px 28px 28px;
+    padding: 4px 28px 28px 28px;
     scrollbar-width: none;
   }
   #body::-webkit-scrollbar { display: none; }
 
   .sec {
-    font-size: 13px;
+    font-size: 11.5px;
     font-weight: 600;
-    letter-spacing: -0.01em;
-    color: #9aa0aa;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #7e838f;
     margin: 20px 2px 10px 2px;
   }
   .pane > .sec:first-child { margin-top: 2px; }
 
   /* Pane Smooth Entrance Animation */
   .pane:not([hidden]) {
-    animation: paneFadeIn 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: paneFadeIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   @keyframes paneFadeIn {
     from {
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateY(6px);
     }
     to {
       opacity: 1;
@@ -353,87 +351,47 @@
   }
 
   /* ==========================================================================
-     ACCOUNT CARDS: FLUID SPRING TRANSITIONS & DYNAMIC UP/DOWN ANIMATION
+     ACCOUNT CARDS: CRISP, SILKY SMOOTH GPU-ACCELERATED CARDS
      ========================================================================== */
   .acc-cards {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
   .acct {
     background: #0a0a0c;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 16px 20px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 15px 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     transform-origin: center;
-    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 240ms ease,
-                border-color 220ms ease,
-                background-color 220ms ease,
-                opacity 240ms ease;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    transition: border-color 180ms ease, background-color 180ms ease;
   }
   .acct:hover {
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+    border-color: rgba(255, 255, 255, 0.13);
+    background-color: #0e0e11;
   }
 
   /* Staggered entrance on initial boot view only */
   .booting .acc-cards > .acct {
-    animation: cardCascadeIn 340ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation: cardCascadeIn 300ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
-  .booting .acc-cards > .acct:nth-child(1) { animation-delay: 30ms; }
-  .booting .acc-cards > .acct:nth-child(2) { animation-delay: 70ms; }
-  .booting .acc-cards > .acct:nth-child(3) { animation-delay: 110ms; }
-  .booting .acc-cards > .acct:nth-child(4) { animation-delay: 150ms; }
+  .booting .acc-cards > .acct:nth-child(1) { animation-delay: 20ms; }
+  .booting .acc-cards > .acct:nth-child(2) { animation-delay: 50ms; }
+  .booting .acc-cards > .acct:nth-child(3) { animation-delay: 80ms; }
+  .booting .acc-cards > .acct:nth-child(4) { animation-delay: 110ms; }
 
   @keyframes cardCascadeIn {
     from {
       opacity: 0;
-      transform: translateY(14px) scale(0.98);
+      transform: translate3d(0, 10px, 0);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  /* Up/Down Fluid Movement on ON / OFF Toggle */
-  .acct.anim-leaving-down {
-    opacity: 0 !important;
-    transform: translateY(24px) scale(0.96) !important;
-    pointer-events: none;
-  }
-  .acct.anim-leaving-up {
-    opacity: 0 !important;
-    transform: translateY(-24px) scale(0.96) !important;
-    pointer-events: none;
-  }
-  .acct.anim-entering-up {
-    animation: cardSlideInUp 320ms cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-  }
-  @keyframes cardSlideInUp {
-    from {
-      opacity: 0;
-      transform: translateY(22px) scale(0.97);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-  .acct.anim-entering-down {
-    animation: cardSlideInDown 320ms cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-  }
-  @keyframes cardSlideInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-22px) scale(0.97);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translate3d(0, 0, 0);
     }
   }
 
@@ -442,12 +400,12 @@
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-    min-height: 44px;
+    min-height: 42px;
   }
   .acct-left {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 13px;
     min-width: 0;
   }
   .acct-info {
@@ -458,57 +416,57 @@
     min-width: 0;
   }
   .acct-title {
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 600;
     color: #ffffff;
     letter-spacing: -0.01em;
   }
   .acct-status {
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 400;
     color: #7a7f8c;
   }
   .acct.off .acct-title {
-    color: #8e929b;
+    color: #828691;
   }
   .acct.off .glyph {
-    opacity: 0.6;
+    opacity: 0.55;
   }
 
   /* Squircle Icon Container */
   .glyph {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    border-radius: 12px;
-    background: #17181d;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 10px;
+    background: #141519;
     border: 1px solid rgba(255, 255, 255, 0.06);
     display: grid;
     place-items: center;
     flex: none;
     color: #ffffff;
-    transition: transform 220ms cubic-bezier(0.34, 1.4, 0.64, 1), background-color 200ms ease;
+    transition: background-color 160ms ease, border-color 160ms ease;
   }
   .acct:hover .glyph {
-    transform: scale(1.04);
-    background-color: #1e1f26;
+    background-color: #191a20;
+    border-color: rgba(255, 255, 255, 0.10);
   }
   .glyph svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     fill: currentColor;
   }
   .glyph img {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
     display: block;
   }
   .glyph.letter {
     font-size: 14px;
     font-weight: 700;
-    background: #17181d;
+    background: #141519;
     color: #ffffff;
   }
   /* Specific branded glyph colors */
@@ -519,7 +477,7 @@
     fill: #d97757;
   }
   .acct:has([data-np="glm"]) .glyph.letter {
-    background: #17181d;
+    background: #141519;
     color: #ffffff;
   }
 
@@ -527,80 +485,68 @@
   .acct-nested {
     background: #040405;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 16px 18px;
-    margin-top: 14px;
-    animation: wellSlideDown 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  @keyframes wellSlideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    border-radius: 10px;
+    padding: 13px 16px;
+    margin-top: 12px;
   }
   .acct-nested-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 500;
     color: #ffffff;
   }
   .acct-nested-desc {
-    font-size: 12.5px;
+    font-size: 12px;
     line-height: 1.5;
     color: #7a7f8c;
-    margin-top: 8px;
+    margin-top: 6px;
   }
   .acct-nested-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-    padding: 4px 0;
+    padding: 3px 0;
   }
   .acct-nested-row + .acct-nested-row {
-    margin-top: 10px;
+    margin-top: 8px;
   }
   .acct-nested-row span {
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 400;
     color: #8e929b;
   }
 
   /* Notice Banner Card at Bottom */
   .acct-notice {
-    background: #0a0a0c;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 14px 18px;
+    background: #09090b;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 4px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    margin-top: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: border-color 160ms ease, background-color 160ms ease;
   }
   .acct-notice:hover {
-    transform: translateY(-1px);
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.10);
+    background-color: #0d0d10;
   }
   .acct-notice .notice-info {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     flex: none;
     stroke: #8e929b;
     color: #8e929b;
   }
   .acct-notice span {
-    font-size: 13px;
+    font-size: 12.5px;
     color: #8e929b;
     flex: 1;
     line-height: 1.4;
@@ -611,35 +557,33 @@
     flex: none;
     stroke: #5c606a;
     color: #5c606a;
-    transition: stroke 200ms ease, transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    transition: stroke 160ms ease;
   }
   .acct-notice:hover .notice-chevron {
     stroke: #ffffff;
-    transform: translateX(2px);
   }
 
   /* ==========================================================================
-     ULTRA-PREMIUM APPLE-GRADE DYNAMIC SPRING TOGGLE SWITCH
+     ULTRA-PREMIUM APPLE-GRADE MINIMAL TOGGLE SWITCH
      ========================================================================== */
   .switch {
-    width: 46px;
-    height: 26px;
+    width: 44px;
+    height: 25px;
     border-radius: 13px;
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    background: #25262c;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #232429;
     position: relative;
     flex: none;
     padding: 0;
     cursor: pointer;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-    transition: background-color 260ms cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 260ms ease,
-                box-shadow 260ms ease,
-                transform 140ms cubic-bezier(0.34, 1.4, 0.64, 1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+    transition: background-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                border-color 220ms ease,
+                box-shadow 220ms ease;
   }
   .switch:hover {
-    background: #2c2e35;
-    border-color: rgba(255, 255, 255, 0.18);
+    background: #2a2b31;
+    border-color: rgba(255, 255, 255, 0.15);
   }
   .switch:active {
     transform: scale(0.96);
@@ -649,82 +593,77 @@
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
     border-radius: 50%;
     background: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0, 0, 0, 0.4);
-    transition: left 280ms cubic-bezier(0.34, 1.45, 0.64, 1),
-                width 180ms ease,
-                box-shadow 240ms ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    transition: left 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                width 160ms ease,
+                background-color 200ms ease;
   }
-  /* Elastic stretch effect on press */
   .switch:active::after {
-    width: 24px;
+    width: 22px;
   }
   
   /* Active (ON) state: Crisp Minimalist Apple Pure White */
   .switch.on {
     background: #ffffff;
     border-color: #ffffff;
-    box-shadow: 0 1px 8px rgba(255, 255, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 1px 4px rgba(255, 255, 255, 0.25);
   }
   .switch.on:hover {
-    background: #f0f0f3;
-    border-color: #f0f0f3;
-    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.45);
+    background: #f2f2f5;
+    border-color: #f2f2f5;
   }
   .switch.on::after {
-    left: 22px;
+    left: 21px;
     background: #000000;
-    box-shadow: -1px 2px 6px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
   .switch.on:active::after {
     left: 18px;
-    width: 24px;
+    width: 22px;
   }
   .switch:disabled, .switch.locked {
-    opacity: 0.38;
+    opacity: 0.35;
     cursor: not-allowed;
   }
   .booting .switch::after { transition: none !important; }
 
   /* ==========================================================================
-     SELECT DROPDOWNS (WITH SMOOTH ELEVATION & FOCUS GLOW)
+     SELECT DROPDOWNS
      ========================================================================== */
   select {
     font: inherit;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 500;
     color: #ffffff;
-    background: #18191e;
+    background: #16171b;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 7px 34px 7px 14px;
-    min-width: 130px;
+    border-radius: 8px;
+    padding: 6px 30px 6px 12px;
+    min-width: 125px;
     cursor: pointer;
     outline: none;
     -webkit-appearance: none;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%238e929b'%3e%3cpath fill-rule='evenodd' d='M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%238e929b'%3e%3cpath fill-rule='evenodd' d='M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 10px center;
-    background-size: 14px 14px;
-    transition: border-color 200ms ease, background-color 200ms ease, transform 150ms ease, box-shadow 200ms ease;
+    background-size: 13px 13px;
+    transition: border-color 160ms ease, background-color 160ms ease;
   }
   select:hover {
-    border-color: rgba(255, 255, 255, 0.20);
-    background-color: #21232a;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.18);
+    background-color: #1c1d22;
   }
   select:focus {
     border-color: #26D67C;
-    box-shadow: 0 0 0 3px rgba(38, 214, 124, 0.18);
-    transform: translateY(0);
+    box-shadow: 0 0 0 2px rgba(38, 214, 124, 0.2);
   }
   select option {
-    background: #18191e;
+    background: #16171b;
     color: #ffffff;
   }
 
@@ -2088,16 +2027,11 @@ function agSelect(key, choices, value){
     + choices.map(([v, t]) => '<option value="' + v + '"' + (v === value ? ' selected' : '') + '>' + esc(ui(t, t)) + '</option>').join('')
     + '</select>';
 }
-let lastToggledAction = null; // { id, direction: 'up' | 'down' }
 let animatingCard = false;
 
 function accountBlock(p, isOn, locked){
   const st = statusText(p);
-  let animClass = '';
-  if(lastToggledAction && lastToggledAction.id === p.id){
-    animClass = lastToggledAction.direction === 'up' ? ' anim-entering-up' : ' anim-entering-down';
-  }
-  let h = '<div class="acct' + (isOn ? '' : ' off') + animClass + '" data-provider="' + esc(p.id) + '">'
+  let h = '<div class="acct' + (isOn ? '' : ' off') + '" data-provider="' + esc(p.id) + '">'
     + '<div class="acct-line">'
     + '<div class="acct-left">'
     + glyphHtml(p)
@@ -2144,7 +2078,7 @@ function saveNotch(next, skipReRender){
   if(!skipReRender) renderAccounts();
   invoke('set_notch_slots', { slots: store.map(sl => ({ provider:sl.provider })) })
     .then(() => toast())
-    .catch(e => { notchSlots = prev; renderAccounts(); strip('set_notch_slots failed: ' + errText(e)); });
+    .catch(e => { notchSlots = prev; if(!skipReRender) renderAccounts(); strip('set_notch_slots failed: ' + errText(e)); });
 }
 function toggleNotch(id){
   const ids = providerList().map(p => p.id);
@@ -2172,38 +2106,144 @@ function animateToggleNotch(id, btn){
     return;
   }
   animatingCard = true;
-  btn.classList.toggle('on', !isOn);
-  btn.setAttribute('aria-checked', !isOn ? 'true' : 'false');
+  
+  const ids = providerList().map(p => p.id);
+  const nextOn = on.slice();
+  const at = nextOn.findIndex(sl => sl.provider === id);
+  if(at >= 0) nextOn.splice(at, 1);
+  else nextOn.push({ provider: id });
+  nextOn.sort((a, b) => ids.indexOf(a.provider) - ids.indexOf(b.provider));
   
   if(isOn){
-    card.classList.add('anim-leaving-down');
-    lastToggledAction = { id: id, direction: 'down' };
-  } else {
-    card.classList.add('anim-leaving-up');
-    lastToggledAction = { id: id, direction: 'up' };
-  }
-  
-  setTimeout(() => {
-    // Calculate new notch state
-    const ids = providerList().map(p => p.id);
-    const nextOn = on.slice();
-    const at = nextOn.findIndex(sl => sl.provider === id);
-    if(at >= 0) nextOn.splice(at, 1);
-    else nextOn.push({ provider: id });
-    nextOn.sort((a, b) => ids.indexOf(a.provider) - ids.indexOf(b.provider));
+    // Toggling OFF (from Connected to Not Connected)
+    btn.classList.remove('on');
+    btn.setAttribute('aria-checked', 'false');
     
-    // Save to Rust and re-render with target animation class
-    saveNotch(nextOn);
+    // Smooth exit from Connected list: sinks slightly and fades
+    card.style.transition = 'transform 240ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease';
+    card.style.transform = 'translate3d(0, 16px, 0) scale(0.97)';
+    card.style.opacity = '0';
+    card.style.pointerEvents = 'none';
     
-    animatingCard = false;
     setTimeout(() => {
-      lastToggledAction = null;
-      const targetCard = document.querySelector(`.acct[data-provider="${id}"]`);
-      if(targetCard){
-        targetCard.classList.remove('anim-entering-up', 'anim-entering-down');
+      const offContainer = document.getElementById('acc-off');
+      const offNotice = offContainer.querySelector('.acct-notice');
+      card.classList.add('off');
+      
+      // Remove nested well if present
+      const nested = card.querySelector('.acct-nested');
+      if(nested) nested.remove();
+      
+      if(offNotice) offContainer.insertBefore(card, offNotice);
+      else offContainer.appendChild(card);
+      document.getElementById('acc-off-wrap').hidden = false;
+      
+      // Reset position above and slide in smoothly
+      card.style.transition = 'none';
+      card.style.transform = 'translate3d(0, -12px, 0) scale(0.98)';
+      card.style.opacity = '0';
+      card.offsetHeight; // force reflow
+      
+      card.style.transition = 'transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease';
+      card.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      card.style.opacity = '1';
+      
+      // Update lock state on remaining connected cards
+      const remainingConnected = document.querySelectorAll('#acc-on .acct');
+      remainingConnected.forEach(c => {
+        const sw = c.querySelector('.switch');
+        if(sw) sw.classList.toggle('locked', remainingConnected.length === 1);
+      });
+      
+      saveNotch(nextOn, true);
+      
+      setTimeout(() => {
+        card.style.transition = '';
+        card.style.transform = '';
+        card.style.opacity = '';
+        card.style.pointerEvents = '';
+        animatingCard = false;
+      }, 280);
+    }, 220);
+  } else {
+    // Toggling ON (from Not Connected to Connected)
+    btn.classList.add('on');
+    btn.setAttribute('aria-checked', 'true');
+    
+    // Smooth exit from Not Connected list: floats upward and fades
+    card.style.transition = 'transform 240ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease';
+    card.style.transform = 'translate3d(0, -16px, 0) scale(0.97)';
+    card.style.opacity = '0';
+    card.style.pointerEvents = 'none';
+    
+    setTimeout(() => {
+      const onContainer = document.getElementById('acc-on');
+      const onNotice = onContainer.querySelector('.acct-notice');
+      card.classList.remove('off');
+      
+      // If gemini or claude, inject nested well
+      if(id === 'gemini' && !card.querySelector('.acct-nested')){
+        const well = document.createElement('div');
+        well.className = 'acct-nested';
+        well.innerHTML = '<div class="acct-nested-row"><span>' + esc(ui('Notch reads', 'Notch reads')) + '</span>' + agSelect('limit', AG_LIMITS, agPrefs.limit) + '</div>'
+          + '<div class="acct-nested-row"><span>' + esc(ui('Model data', 'Model data')) + '</span>' + agSelect('model', AG_MODELS, agPrefs.model) + '</div>';
+        card.appendChild(well);
+      } else if(id === 'claude' && !card.querySelector('.acct-nested')){
+        const well = document.createElement('div');
+        well.className = 'acct-nested';
+        well.innerHTML = '<div class="acct-nested-head"><span>' + esc(ui('Let Claude Code notify Codenotch', 'Let Claude Code notify Codenotch')) + '</span>'
+          + '<button class="switch' + (hooks.value ? ' on' : '') + '" role="switch" aria-checked="' + hooks.value + '" data-remote="hooks"'
+          + (hooks.busy ? ' disabled' : '') + ' aria-label="' + esc(ui('Let Claude Code notify Codenotch', 'Let Claude Code notify Codenotch')) + '"></button></div>'
+          + '<div class="acct-nested-desc">' + esc(ui(HOOKS_WHY, HOOKS_WHY)) + '</div>';
+        card.appendChild(well);
       }
-    }, 350);
-  }, 220);
+      
+      // Insert in sorted order among connected cards
+      const nextOnIds = nextOn.map(sl => sl.provider);
+      const targetIdx = nextOnIds.indexOf(id);
+      const existingConnected = Array.from(onContainer.querySelectorAll('.acct'));
+      let inserted = false;
+      for(const ec of existingConnected){
+        const ecId = ec.dataset.provider;
+        if(nextOnIds.indexOf(ecId) > targetIdx){
+          onContainer.insertBefore(card, ec);
+          inserted = true;
+          break;
+        }
+      }
+      if(!inserted){
+        if(onNotice) onContainer.insertBefore(card, onNotice);
+        else onContainer.appendChild(card);
+      }
+      
+      // Check if offContainer has any remaining cards
+      const remainingOff = document.querySelectorAll('#acc-off .acct');
+      document.getElementById('acc-off-wrap').hidden = remainingOff.length === 0;
+      
+      // Slide into Connected with silky spring transition
+      card.style.transition = 'none';
+      card.style.transform = 'translate3d(0, 14px, 0) scale(0.98)';
+      card.style.opacity = '0';
+      card.offsetHeight; // force reflow
+      
+      card.style.transition = 'transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease';
+      card.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      card.style.opacity = '1';
+      
+      // Unlock all connected cards since count > 1
+      document.querySelectorAll('#acc-on .acct .switch').forEach(sw => sw.classList.remove('locked'));
+      
+      saveNotch(nextOn, true);
+      
+      setTimeout(() => {
+        card.style.transition = '';
+        card.style.transform = '';
+        card.style.opacity = '';
+        card.style.pointerEvents = '';
+        animatingCard = false;
+      }, 280);
+    }, 220);
+  }
 }
 
 const accountsPane = document.getElementById('pane-accounts');

@@ -3,12 +3,9 @@
 //! Windows material to the Mac's window vibrancy, and told what the page cannot read for itself:
 //! whether Mica is there to draw on, and the accent colour.
 
-use tauri::window::{Effect, EffectsBuilder};
 use tauri::{AppHandle, Manager, WebviewUrl, WebviewWindowBuilder};
 
 const LABEL: &str = "settings";
-/// Mica arrived with Windows 11's first build.
-const FIRST_MICA_BUILD: u32 = 22000;
 
 /// Always built on a later turn of the event loop. A window built inside a synchronous command
 /// deadlocks WebView2 and comes up blank, and asking `run_on_main_thread` from the main thread —
@@ -47,10 +44,9 @@ fn open_now(app: &AppHandle) {
     builder = builder
         .theme(theme)
         .initialization_script(crate::theme_script(crate::resolved_theme(app)));
-    // Without Mica the window stays opaque and the page draws solid surfaces instead
-    if has_mica() {
-        builder = builder.transparent(true).effects(EffectsBuilder::new().effect(mica_for(theme)).build());
-    }
+    // The settings window draws solid opaque pitch-black surfaces matching the notch,
+    // eliminating wallpaper translucency and blur artifacts.
+    builder = builder.transparent(false);
     match builder.build() {
         // A page that never reports ready must not leave the window open but invisible
         Ok(w) => {
@@ -88,7 +84,7 @@ pub struct SystemLook {
 #[tauri::command]
 pub fn get_system_look() -> SystemLook {
     SystemLook {
-        mica: has_mica(),
+        mica: false,
         accent: reg_binary(r"Software\Microsoft\Windows\CurrentVersion\Explorer\Accent", "AccentPalette")
             .map(|bytes| palette(&bytes))
             .unwrap_or_default(),
@@ -100,33 +96,8 @@ pub fn quit_app(app: AppHandle) {
     app.exit(0);
 }
 
-/// Keeps Mica on the same side as the page above it.
-///
-/// Plain `Effect::Mica` follows the Windows setting, which is right for "System" and wrong for the
-/// other two: a light page over dark Mica reads as a bug. Nothing to do without Mica, where the page
-/// draws its own opaque surfaces.
-pub fn follow_theme(app: &AppHandle, theme: Option<tauri::Theme>) {
-    let Some(w) = app.get_webview_window(LABEL) else { return };
-    if !has_mica() {
-        return;
-    }
-    let _ = w.set_effects(EffectsBuilder::new().effect(mica_for(theme)).build());
-}
-
-/// Plain `Mica` follows the Windows setting, which is right for "System" and wrong for the other
-/// two: a light page over dark Mica reads as a bug.
-fn mica_for(theme: Option<tauri::Theme>) -> Effect {
-    match theme {
-        Some(tauri::Theme::Light) => Effect::MicaLight,
-        Some(tauri::Theme::Dark) => Effect::MicaDark,
-        _ => Effect::Mica,
-    }
-}
-
-fn has_mica() -> bool {
-    reg_string(r"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber")
-        .and_then(|build| build.trim().parse::<u32>().ok())
-        .is_some_and(|build| build >= FIRST_MICA_BUILD)
+/// Keeps the window solid opaque.
+pub fn follow_theme(_app: &AppHandle, _theme: Option<tauri::Theme>) {
 }
 
 fn palette(bytes: &[u8]) -> Vec<String> {
@@ -142,17 +113,6 @@ fn reg_binary(key: &str, value: &str) -> Option<Vec<u8>> {
     reg_get(HKEY_CURRENT_USER, key, value, RRF_RT_REG_BINARY, data.as_mut_ptr().cast(), &mut size).then(|| {
         data.truncate(size as usize);
         data
-    })
-}
-
-#[cfg(windows)]
-fn reg_string(key: &str, value: &str) -> Option<String> {
-    use windows::Win32::System::Registry::{HKEY_LOCAL_MACHINE, RRF_RT_REG_SZ};
-    let mut data = vec![0u16; 64];
-    let mut size = (data.len() * 2) as u32;
-    reg_get(HKEY_LOCAL_MACHINE, key, value, RRF_RT_REG_SZ, data.as_mut_ptr().cast(), &mut size).then(|| {
-        let chars = (size as usize / 2).min(data.len());
-        String::from_utf16_lossy(&data[..chars]).trim_end_matches('\0').to_string()
     })
 }
 
