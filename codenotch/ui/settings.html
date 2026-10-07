@@ -6,21 +6,21 @@
 <style>
   :root {
     --accent: #26D67C;
-    --bg: #0a0b0d;
-    --pane: #0a0b0d;
-    --side: #0a0b0d;
+    --bg: #000000;
+    --pane: #000000;
+    --side: #000000;
     --text: #ffffff;
-    --text2: #828691;
+    --text2: #8a8e99;
     --text3: #585c66;
-    --group: #111215;
-    --group-border: rgba(255, 255, 255, 0.07);
-    --well: #0d0e11;
-    --well-border: rgba(255, 255, 255, 0.04);
-    --line: rgba(255, 255, 255, 0.06);
-    --hover: rgba(255, 255, 255, 0.04);
-    --btn: #18191e;
-    --btn-border: rgba(255, 255, 255, 0.08);
-    --btn-hover: #212329;
+    --group: #0a0a0a;
+    --group-border: rgba(255, 255, 255, 0.08);
+    --well: #050505;
+    --well-border: rgba(255, 255, 255, 0.05);
+    --line: rgba(255, 255, 255, 0.07);
+    --hover: rgba(255, 255, 255, 0.05);
+    --btn: #141416;
+    --btn-border: rgba(255, 255, 255, 0.09);
+    --btn-hover: #1c1d22;
     --danger: #ff3b30;
     --danger-bg: rgba(255, 59, 48, 0.12);
     --card-radius: 16px;
@@ -134,19 +134,19 @@
     user-select: none;
   }
   .row:hover:not(.sel) {
-    background-color: rgba(255, 255, 255, 0.04);
-    color: #d0d3db;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #e2e4ea;
     transform: translateX(2px);
   }
   .row:active {
     transform: scale(0.97);
   }
   .row.sel {
-    background-color: #18191d;
-    border-color: rgba(255, 255, 255, 0.08);
+    background-color: #121214;
+    border-color: rgba(255, 255, 255, 0.10);
     color: #ffffff;
     font-weight: 600;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   }
 
   .badge {
@@ -158,8 +158,8 @@
     display: grid;
     place-items: center;
     flex: none;
-    background: #15161a;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #0d0d0f;
+    border: 1px solid rgba(255, 255, 255, 0.06);
     color: #828691;
     transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 200ms cubic-bezier(0.34, 1.4, 0.64, 1);
   }
@@ -167,8 +167,8 @@
     transform: scale(1.05);
   }
   .row.sel .badge {
-    background: #24262c;
-    border-color: rgba(255, 255, 255, 0.09);
+    background: #1c1d22;
+    border-color: rgba(255, 255, 255, 0.12);
     color: #ffffff;
     transform: scale(1.02);
   }
@@ -188,8 +188,8 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 14px;
-    background: #131417;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: #0d0d10;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: pointer;
     flex: none;
     transition: background-color 200ms ease, border-color 200ms ease, transform 150ms cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 200ms ease;
@@ -197,10 +197,10 @@
     margin-top: auto;
   }
   .quit-card:hover {
-    background-color: #18191e;
-    border-color: rgba(255, 255, 255, 0.12);
+    background-color: #141418;
+    border-color: rgba(255, 255, 255, 0.14);
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   }
   .quit-card:active {
     transform: scale(0.97);
@@ -361,11 +361,11 @@
     gap: 12px;
   }
   .acct {
-    background: #111215;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: #0a0a0c;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 16px 20px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
     transform-origin: center;
     transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 240ms ease,
@@ -375,18 +375,18 @@
   }
   .acct:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
   }
 
-  /* Staggered entrance on initial view */
-  .acc-cards > .acct {
+  /* Staggered entrance on initial boot view only */
+  .booting .acc-cards > .acct {
     animation: cardCascadeIn 340ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
-  .acc-cards > .acct:nth-child(1) { animation-delay: 30ms; }
-  .acc-cards > .acct:nth-child(2) { animation-delay: 70ms; }
-  .acc-cards > .acct:nth-child(3) { animation-delay: 110ms; }
-  .acc-cards > .acct:nth-child(4) { animation-delay: 150ms; }
+  .booting .acc-cards > .acct:nth-child(1) { animation-delay: 30ms; }
+  .booting .acc-cards > .acct:nth-child(2) { animation-delay: 70ms; }
+  .booting .acc-cards > .acct:nth-child(3) { animation-delay: 110ms; }
+  .booting .acc-cards > .acct:nth-child(4) { animation-delay: 150ms; }
 
   @keyframes cardCascadeIn {
     from {
@@ -525,8 +525,8 @@
 
   /* Nested Sub-Cards / Wells (Claude Hook & Antigravity Selects) */
   .acct-nested {
-    background: #0d0e11;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: #040405;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     padding: 16px 18px;
     margin-top: 14px;
@@ -575,8 +575,8 @@
 
   /* Notice Banner Card at Bottom */
   .acct-notice {
-    background: #111215;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: #0a0a0c;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 14px 18px;
     display: flex;
@@ -584,13 +584,13 @@
     justify-content: space-between;
     gap: 12px;
     margin-top: 4px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   }
   .acct-notice:hover {
     transform: translateY(-1px);
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   }
   .acct-notice .notice-info {
     width: 16px;
@@ -663,21 +663,21 @@
     width: 24px;
   }
   
-  /* Active (ON) state: Vibrant Apple / Curare Emerald Green */
+  /* Active (ON) state: Crisp Minimalist Apple Pure White */
   .switch.on {
-    background: #26D67C;
-    border-color: #26D67C;
-    box-shadow: 0 0 14px rgba(38, 214, 124, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    background: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 1px 8px rgba(255, 255, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.8);
   }
   .switch.on:hover {
-    background: #28e083;
-    border-color: #28e083;
-    box-shadow: 0 0 18px rgba(38, 214, 124, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    background: #f0f0f3;
+    border-color: #f0f0f3;
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.45);
   }
   .switch.on::after {
     left: 22px;
-    background: #ffffff;
-    box-shadow: -1px 2px 6px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.3);
+    background: #000000;
+    box-shadow: -1px 2px 6px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0, 0, 0, 0.5);
   }
   .switch.on:active::after {
     left: 18px;
@@ -2041,7 +2041,11 @@ function drawSwitch(el, s){
   el.setAttribute('aria-checked', s.value ? 'true' : 'false');
   el.disabled = s.busy;
 }
-const hooks = remote('get_hooks_installed', 'set_hooks_installed', 'The Claude Code messages', () => renderAccounts());
+function updateHooksSwitch(){
+  const sw = document.querySelector('[data-remote="hooks"]');
+  if(sw) drawSwitch(sw, hooks);
+}
+const hooks = remote('get_hooks_installed', 'set_hooks_installed', 'The Claude Code messages', () => updateHooksSwitch());
 const autostart = remote('get_autostart', 'set_autostart', 'Open Codenotch at login', () => drawSwitch(document.getElementById('sw-autostart'), autostart));
 document.getElementById('sw-autostart').addEventListener('click', () => autostart.toggle());
 const resetAlert = remote('get_reset_notifications', 'set_reset_notifications', 'Reset notifications', () => drawSwitch(document.getElementById('sw-reset-alert'), resetAlert));
@@ -2132,12 +2136,12 @@ function renderAccounts(){
   document.getElementById('acc-off').innerHTML = off.map(p => accountBlock(p, false, false)).join('')
     + '<div class="acct-notice">' + noticeSvg + '<span>' + esc(ui(NO_RING, NO_RING)) + '</span>' + chevronSvg + '</div>';
 }
-function saveNotch(next){
+function saveNotch(next, skipReRender){
   const ids = providerList().map(p => p.id);
   const store = next.length === ids.length ? [] : next;
   const prev = notchSlots;
   notchSlots = store;
-  renderAccounts();
+  if(!skipReRender) renderAccounts();
   invoke('set_notch_slots', { slots: store.map(sl => ({ provider:sl.provider })) })
     .then(() => toast())
     .catch(e => { notchSlots = prev; renderAccounts(); strip('set_notch_slots failed: ' + errText(e)); });
@@ -2169,6 +2173,8 @@ function animateToggleNotch(id, btn){
   }
   animatingCard = true;
   btn.classList.toggle('on', !isOn);
+  btn.setAttribute('aria-checked', !isOn ? 'true' : 'false');
+  
   if(isOn){
     card.classList.add('anim-leaving-down');
     lastToggledAction = { id: id, direction: 'down' };
@@ -2176,10 +2182,27 @@ function animateToggleNotch(id, btn){
     card.classList.add('anim-leaving-up');
     lastToggledAction = { id: id, direction: 'up' };
   }
+  
   setTimeout(() => {
-    toggleNotch(id);
+    // Calculate new notch state
+    const ids = providerList().map(p => p.id);
+    const nextOn = on.slice();
+    const at = nextOn.findIndex(sl => sl.provider === id);
+    if(at >= 0) nextOn.splice(at, 1);
+    else nextOn.push({ provider: id });
+    nextOn.sort((a, b) => ids.indexOf(a.provider) - ids.indexOf(b.provider));
+    
+    // Save to Rust and re-render with target animation class
+    saveNotch(nextOn);
+    
     animatingCard = false;
-    setTimeout(() => { lastToggledAction = null; }, 350);
+    setTimeout(() => {
+      lastToggledAction = null;
+      const targetCard = document.querySelector(`.acct[data-provider="${id}"]`);
+      if(targetCard){
+        targetCard.classList.remove('anim-entering-up', 'anim-entering-down');
+      }
+    }, 350);
   }, 220);
 }
 
