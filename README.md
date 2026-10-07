@@ -4,7 +4,7 @@
 
 ### The Minimal, Apple-Inspired AI Quota Notch & Companion for Windows 💻✨
 
-[![Version](https://img.shields.io/badge/version-1.22.0-26D67C?style=for-the-badge)](https://github.com/varunahuja70/DevPulse/releases)
+[![Version](https://img.shields.io/badge/version-1.22.2-26D67C?style=for-the-badge)](https://github.com/varunahuja70/DevPulse/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D6?style=for-the-badge&logo=windows)](https://github.com/varunahuja70/DevPulse)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge)](LICENSE)
 
@@ -59,7 +59,7 @@ Just want to use the app? Grab the latest pre-built Windows installer:
 
 👉 **[Download Latest DevPulse Setup (.exe)](https://github.com/varunahuja70/DevPulse/releases/latest)**
 
-1. Download **`DevPulse_1.22.0_x64-setup.exe`**.
+1. Download **`DevPulse_1.22.2_x64-setup.exe`**.
 2. Run the installer and launch **DevPulse**.
 3. It will automatically detect your local AI sessions! 🎉
 
@@ -97,7 +97,7 @@ cd codenotch
 npx @tauri-apps/cli build
 ```
 The fresh installer will be created at:
-📂 `target/release/bundle/nsis/DevPulse_1.22.0_x64-setup.exe`
+📂 `target/release/bundle/nsis/DevPulse_1.22.2_x64-setup.exe`
 
 ---
 

@@ -1,6 +1,6 @@
 [package]
 name = "codenotch"
-version = "1.22.0"
+version = "1.22.2"
 edition = "2021"
 description = "DevPulse for Windows — AI quota and live activity notch for Claude, Codex, Cursor and Antigravity"
 authors = ["Varun Ahuja"]
