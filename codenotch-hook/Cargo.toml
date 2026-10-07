@@ -1,0 +1,9 @@
+[package]
+name = "codenotch-hook"
+version = "0.3.0"
+edition = "2021"
+description = "Codenotch hook launcher: report Claude Code hook events, auto-start main app"
+authors = ["Varun Ahuja"]
+license = "MIT"
+
+[dependencies]

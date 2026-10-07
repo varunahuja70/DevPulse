@@ -1,0 +1,5 @@
+target/
+*.log
+codenotch/gen/
+node_modules/
+*.exe
